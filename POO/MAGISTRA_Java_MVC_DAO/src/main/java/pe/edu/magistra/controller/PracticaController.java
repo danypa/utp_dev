@@ -42,6 +42,14 @@ public class PracticaController {
         respuestas.add(r);
     }
 
+    public Map<Integer, Integer> alternativasMarcadas() {
+        Map<Integer, Integer> marcadas = new HashMap<>();
+        for (RespuestaUsuario respuesta : respuestas) {
+            marcadas.put(respuesta.getIdPregunta(), respuesta.getIdAlternativa());
+        }
+        return Map.copyOf(marcadas);
+    }
+
     public Resultado finalizar() throws Exception {
         if (resultadoGuardado == null) {
             resultadoGuardado = guardarIntento();

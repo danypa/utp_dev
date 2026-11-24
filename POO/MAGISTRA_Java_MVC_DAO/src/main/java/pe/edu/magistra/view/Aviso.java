@@ -10,8 +10,8 @@ final class Aviso extends JDialog {
 
     enum Tipo {
         ATENCION("Aviso", "!", new Color(0x855114), new Color(0xFFF1DF)),
-        ERROR("Error", "×", new Color(0xA43832), new Color(0xFCECE9)),
-        EXITO("Confirmación", "✓", new Color(0x206950), new Color(0xE7F4EE)),
+        ERROR("Error", "×", UI.ROJO, UI.ROJO_CLARO),
+        EXITO("Confirmación", "✓", UI.VERDE, UI.VERDE_CLARO),
         INFORMACION("Información", "i", UI.AZUL, UI.AZUL_CLARO);
 
         final String seccion, simbolo;

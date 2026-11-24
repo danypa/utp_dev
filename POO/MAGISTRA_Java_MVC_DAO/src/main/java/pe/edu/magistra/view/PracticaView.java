@@ -9,6 +9,7 @@ import pe.edu.magistra.model.Tema;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
@@ -115,8 +116,8 @@ public class PracticaView extends JDialog {
         grupo = new ButtonGroup();
         for (Alternativa alternativa : pregunta.getAlternativas()) {
             int posicion = grupo.getButtonCount();
-            String letra = posicion < 26 ? String.valueOf((char) ('A' + posicion)) : Integer.toString(posicion + 1);
-            JRadioButton opcion = UI.alternativa(letra + ")  " + alternativa.getTexto(), alternativa.getIdAlternativa());
+            String texto = UI.textoOpcion(posicion, alternativa.getTexto());
+            JRadioButton opcion = UI.alternativa(texto, alternativa.getIdAlternativa());
             grupo.add(opcion);
             opcion.addItemListener(e -> {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -152,18 +153,30 @@ public class PracticaView extends JDialog {
                 opcion.setEnabled(false);
             }
         }
+        Resultado resultado;
         try {
-            Resultado resultado = practica.finalizar();
-            siguiente.setEnabled(false);
-            String mensaje = String.format("%d de %d respuestas correctas%nPuntaje: %.1f %%%nTiempo: %s",
-                    resultado.getCorrectas(), resultado.getTotalPreguntas(), resultado.getPorcentaje(),
-                    UI.formatoTiempo(resultado.getTiempoTotalSegundos()));
-            Aviso.mostrar(this, Aviso.Tipo.INFORMACION, "Resultado de la práctica", mensaje);
-            dispose();
+            resultado = practica.finalizar();
         } catch (Exception e) {
             siguiente.setText("REINTENTAR GUARDADO");
             UI.error(this, "No se pudo finalizar la práctica", e);
+            return;
         }
+        siguiente.setEnabled(false);
+        mostrarResumen(resultado);
+    }
+
+    private void mostrarResumen(Resultado resultado) {
+        JButton cerrar = UI.boton("Cerrar resumen", UI.Estilo.PRINCIPAL);
+        cerrar.addActionListener(e -> dispose());
+        String titulo = "Resumen de la práctica";
+        setTitle("MAGISTRA · " + titulo);
+        setContentPane(UI.marco(titulo, tema.getNombre(),
+                new ResumenPracticaView(resultado, preguntas, practica.alternativasMarcadas(), cerrar)));
+        getRootPane().setDefaultButton(cerrar);
+        getRootPane().registerKeyboardAction(e -> dispose(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_IN_FOCUSED_WINDOW);
+        revalidate();
+        repaint();
     }
 
     private static int segundosDesde(long inicio) {

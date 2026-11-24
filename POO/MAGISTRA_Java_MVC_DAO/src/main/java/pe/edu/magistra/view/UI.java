@@ -18,6 +18,10 @@ final class UI {
     static final Color AZUL_CLARO = new Color(0xEAF2FF);
     static final Color LINEA = new Color(0xCAD7E9);
     static final Color FONDO = new Color(0xF4F7FB);
+    static final Color VERDE = new Color(0x206950);
+    static final Color VERDE_CLARO = new Color(0xE7F4EE);
+    static final Color ROJO = new Color(0xA43832);
+    static final Color ROJO_CLARO = new Color(0xFCECE9);
 
     enum Estilo {
         MENU(MARINO, null, new Color(0x3C4A79), null, 10),
@@ -83,6 +87,11 @@ final class UI {
 
     static String formatoTiempo(int segundos) {
         return String.format(Locale.ROOT, "%02d:%02d:%02d", segundos / 3600, segundos / 60 % 60, segundos % 60);
+    }
+
+    static String textoOpcion(int posicion, String texto) {
+        String letra = posicion < 26 ? String.valueOf((char) ('A' + posicion)) : Integer.toString(posicion + 1);
+        return letra + ")  " + texto;
     }
 
     static JLabel texto(String valor, int puntos, int estilo, Color color) {
