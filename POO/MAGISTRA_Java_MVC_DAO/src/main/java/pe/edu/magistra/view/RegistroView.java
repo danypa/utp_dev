@@ -7,10 +7,9 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class RegistroView extends JFrame {
+public class RegistroView extends JDialog {
 
     private final AuthController auth;
-    private final Runnable mostrarAcceso;
     private final JTextField nombres = new JTextField();
     private final JTextField apellidos = new JTextField();
     private final JTextField correo = new JTextField();
@@ -19,13 +18,13 @@ public class RegistroView extends JFrame {
     private final JTextField region = new JTextField();
 
     public RegistroView(AuthController auth) {
-        this(auth, () -> new LoginView(auth).setVisible(true));
+        this(null, auth);
     }
 
-    RegistroView(AuthController auth, Runnable mostrarAcceso) {
+    RegistroView(Window propietario, AuthController auth) {
+        super(propietario, "MAGISTRA · Registro");
         this.auth = auth;
-        this.mostrarAcceso = mostrarAcceso;
-        UI.base(this, "MAGISTRA · Registro", 836, 505);
+        UI.prepararDialogo(this, 836, 505);
         setMinimumSize(new Dimension(660, 420));
 
         JPanel cuerpo = UI.panel(new BorderLayout(26, 0));
@@ -73,7 +72,9 @@ public class RegistroView extends JFrame {
 
     private void volverAlAcceso() {
         dispose();
-        mostrarAcceso.run();
+        if (getOwner() == null) {
+            new LoginView(auth).setVisible(true);
+        }
     }
 
     private void guardar() {

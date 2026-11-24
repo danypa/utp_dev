@@ -7,13 +7,18 @@ import java.awt.*;
 import java.net.URI;
 import java.util.*;
 
-public class RecursosView extends JFrame {
+public class RecursosView extends JDialog {
 
     private final DefaultListModel<Recurso> m = new DefaultListModel<>();
     private final JList<Recurso> l = new JList<>(m);
 
     public RecursosView(RecursoController c) {
-        UI.base(this, "MAGISTRA - Recursos", 650, 430);
+        this(null, c);
+    }
+
+    RecursosView(Window propietario, RecursoController c) {
+        super(propietario, "MAGISTRA · Recursos");
+        UI.prepararDialogo(this, 650, 430);
         l.setFont(UI.FONT);
         add(new JScrollPane(l), BorderLayout.CENTER);
         JButton b = UI.btn("Abrir recurso");

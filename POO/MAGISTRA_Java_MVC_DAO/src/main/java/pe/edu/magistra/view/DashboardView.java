@@ -37,6 +37,7 @@ public class DashboardView extends JFrame {
         UI.base(this, "MAGISTRA · Panel de práctica", 960, 545);
         setMinimumSize(new Dimension(760, 475));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setExtendedState(getExtendedState() | MAXIMIZED_BOTH);
 
         JPanel cuerpo = UI.panel(new BorderLayout(30, 0));
         cuerpo.setBorder(UI.margen(16, 14, 18, 30));
@@ -64,9 +65,11 @@ public class DashboardView extends JFrame {
         } catch (Exception e) {
             UI.error(this, "No se pudieron cargar las categorías", e);
         }
-        agregarEnlace(enlaces, "Historial", () -> abrir(new HistorialView(new HistorialController(new IntentoDAOImpl()))));
-        agregarEnlace(enlaces, "Progreso", () -> abrir(new ProgresoView(progreso)));
-        agregarEnlace(enlaces, "Recursos", () -> abrir(new RecursosView(new RecursoController(new RecursoDAOImpl()))));
+        agregarEnlace(enlaces, "Historial",
+                () -> new HistorialView(this, new HistorialController(new IntentoDAOImpl())).setVisible(true));
+        agregarEnlace(enlaces, "Progreso", () -> new ProgresoView(this, progreso).setVisible(true));
+        agregarEnlace(enlaces, "Recursos",
+                () -> new RecursosView(this, new RecursoController(new RecursoDAOImpl())).setVisible(true));
         JButton salir = botonMenu("Cerrar sesión");
         salir.setForeground(new Color(0xFFDFCE));
         salir.addActionListener(e -> {
@@ -91,11 +94,6 @@ public class DashboardView extends JFrame {
         JButton boton = botonMenu(nombre);
         boton.addActionListener(e -> accion.run());
         UI.fila(enlaces, boton, 4);
-    }
-
-    private void abrir(JFrame ventana) {
-        ventana.setLocationRelativeTo(this);
-        ventana.setVisible(true);
     }
 
     private void mostrar(JComponent pagina, JButton enlace) {

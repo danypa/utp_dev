@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Locale;
 
 final class UI {
 
@@ -16,7 +17,7 @@ final class UI {
     static final Color AZUL = new Color(0x3069CE);
     static final Color AZUL_CLARO = new Color(0xEAF2FF);
     static final Color LINEA = new Color(0xCAD7E9);
-    private static final Color FONDO = new Color(0xF4F7FB);
+    static final Color FONDO = new Color(0xF4F7FB);
 
     enum Estilo {
         MENU(MARINO, null, new Color(0x3C4A79), null, 10),
@@ -57,6 +58,13 @@ final class UI {
         f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
+    static void prepararDialogo(JDialog dialogo, int ancho, int alto) {
+        dialogo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        dialogo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        dialogo.setSize(ancho, alto);
+        dialogo.setLocationRelativeTo(dialogo.getOwner());
+    }
+
     static JButton btn(String t) {
         JButton b = new JButton(t);
         b.setFont(FONT);
@@ -71,6 +79,10 @@ final class UI {
 
     static Border margen(int arriba, int izquierda, int abajo, int derecha) {
         return BorderFactory.createEmptyBorder(arriba, izquierda, abajo, derecha);
+    }
+
+    static String formatoTiempo(int segundos) {
+        return String.format(Locale.ROOT, "%02d:%02d:%02d", segundos / 3600, segundos / 60 % 60, segundos % 60);
     }
 
     static JLabel texto(String valor, int puntos, int estilo, Color color) {

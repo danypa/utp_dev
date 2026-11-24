@@ -54,9 +54,7 @@ public class LoginView extends JFrame {
     }
 
     private void abrirRegistro() {
-        RegistroView registro = new RegistroView(auth, this::toFront);
-        registro.setLocationRelativeTo(this);
-        registro.setVisible(true);
+        new RegistroView(this, auth).setVisible(true);
     }
 
     private void login() {

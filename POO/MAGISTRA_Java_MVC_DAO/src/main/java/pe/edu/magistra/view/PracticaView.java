@@ -35,14 +35,12 @@ public class PracticaView extends JDialog {
         this(null, practica, tema);
     }
 
-    PracticaView(JFrame propietario, PracticaController practica, Tema tema) {
+    PracticaView(Window propietario, PracticaController practica, Tema tema) {
         super(propietario, "MAGISTRA · Práctica de examen");
         this.practica = practica;
         this.tema = tema;
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(960, 545);
+        UI.prepararDialogo(this, 960, 545);
         setMinimumSize(new Dimension(620, 430));
-        setLocationRelativeTo(propietario);
 
         JPanel cuerpo = UI.panel(new BorderLayout(0, 16));
         cuerpo.setBorder(UI.margen(18, 30, 10, 36));
@@ -76,7 +74,7 @@ public class PracticaView extends JDialog {
         setContentPane(UI.marco("Práctica de examen", "", cuerpo));
         getRootPane().setDefaultButton(siguiente);
 
-        temporizador = new Timer(1000, e -> reloj.setText(formatoTiempo(segundosDesde(inicioExamen))));
+        temporizador = new Timer(1000, e -> reloj.setText(UI.formatoTiempo(segundosDesde(inicioExamen))));
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -159,7 +157,7 @@ public class PracticaView extends JDialog {
             siguiente.setEnabled(false);
             String mensaje = String.format("%d de %d respuestas correctas%nPuntaje: %.1f %%%nTiempo: %s",
                     resultado.getCorrectas(), resultado.getTotalPreguntas(), resultado.getPorcentaje(),
-                    formatoTiempo(resultado.getTiempoTotalSegundos()));
+                    UI.formatoTiempo(resultado.getTiempoTotalSegundos()));
             Aviso.mostrar(this, Aviso.Tipo.INFORMACION, "Resultado de la práctica", mensaje);
             dispose();
         } catch (Exception e) {
@@ -170,9 +168,5 @@ public class PracticaView extends JDialog {
 
     private static int segundosDesde(long inicio) {
         return (int) TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - inicio);
-    }
-
-    private static String formatoTiempo(int segundos) {
-        return String.format("%02d:%02d:%02d", segundos / 3600, segundos / 60 % 60, segundos % 60);
     }
 }

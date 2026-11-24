@@ -1,3 +1,5 @@
+-- Ejecuta el archivo completo como script en la conexión de MAGISTRA.
+-- En DBeaver para Windows, deja el editor sin texto seleccionado y pulsa Alt+X.
 USE magistra;
 
 -- Agrega tres preguntas a cada uno de los cuatro temas de práctica.

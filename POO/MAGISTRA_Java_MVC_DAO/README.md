@@ -11,7 +11,7 @@ El `pom.xml` declara **MySQL Connector/J 26.10.0**. Maven descarga el driver y l
 ## Base de datos
 1. Ejecute `sql/00_instalacion_completa.sql` en MySQL Workbench o MySQL Client.
 2. El script crea `magistra`, tablas, relaciones, categorías Ascenso/Nombramiento, temas, recursos y preguntas demo: cinco preguntas por cada tema de práctica.
-3. Si la base ya existe, ejecute `sql/03_preguntas_adicionales.sql` para agregar tres preguntas por tema; el script se puede volver a ejecutar sin duplicarlas.
+3. Si la base ya tiene los cuatro temas, abra `sql/03_preguntas_adicionales.sql` en esa conexión y ejecute el archivo completo como script. En DBeaver para Windows, deje el editor sin texto seleccionado y pulse **Alt+X** (Ejecutar script SQL). El archivo agrega tres preguntas por tema y se puede volver a ejecutar sin duplicarlas.
 4. Los datos demo no representan un banco oficial de preguntas.
 
 ## Configuración de conexión
