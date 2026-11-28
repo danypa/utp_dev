@@ -1,6 +1,12 @@
 package pe.edu.magistra.model;
 
-public class Alternativa {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Alternativa implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private int idAlternativa, idPregunta, orden;
     private String texto;

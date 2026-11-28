@@ -1,8 +1,13 @@
 package pe.edu.magistra.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class IntentoPractica {
+public class IntentoPractica implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private long idIntento;
     private int idUsuario, idTema, limiteSegundos, tiempoTotalSegundos;

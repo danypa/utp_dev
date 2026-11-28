@@ -1,6 +1,12 @@
 package pe.edu.magistra.model;
 
-public class Recurso {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Recurso implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private int idRecurso;
     private Integer idCategoria;

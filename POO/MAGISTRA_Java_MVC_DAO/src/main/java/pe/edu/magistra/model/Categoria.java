@@ -1,6 +1,12 @@
 package pe.edu.magistra.model;
 
-public class Categoria {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Categoria implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private int idCategoria;
     private String nombre, descripcion;

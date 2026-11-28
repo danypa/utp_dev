@@ -1,6 +1,12 @@
 package pe.edu.magistra.model;
 
-public class Progreso {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Progreso implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private long idProgreso;
     private int idUsuario, idTema, totalIntentos;

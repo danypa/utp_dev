@@ -1,11 +1,17 @@
 package pe.edu.magistra.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class Usuario {
+public abstract class Usuario implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     protected int idUsuario;
-    protected String nombres, apellidos, correo, passwordHash;
+    protected String nombres, apellidos, correo;
+    protected transient String passwordHash;
     protected LocalDateTime fechaRegistro;
     protected boolean estado;
 

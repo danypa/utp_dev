@@ -1,8 +1,12 @@
 package pe.edu.magistra.model;
 
+import java.io.Serial;
 import java.time.LocalDateTime;
 
 public class Postulante extends Usuario {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String especialidad, region;
 

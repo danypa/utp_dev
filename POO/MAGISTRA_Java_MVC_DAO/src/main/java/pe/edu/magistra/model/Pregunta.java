@@ -1,8 +1,13 @@
 package pe.edu.magistra.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Pregunta {
+public abstract class Pregunta implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     protected int idPregunta, idTema;
     protected String enunciado, explicacion, dificultad;
@@ -33,8 +38,8 @@ public abstract class Pregunta {
         return alternativas;
     }
 
-    public void setAlternativas(List<Alternativa> a) {
-        alternativas = a;
+    public void setAlternativas(List<Alternativa> alternativas) {
+        this.alternativas = alternativas == null ? null : new ArrayList<>(alternativas);
     }
 
     public abstract boolean validarRespuesta(int idAlternativa);

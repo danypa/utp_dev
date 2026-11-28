@@ -1,8 +1,13 @@
 package pe.edu.magistra.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class RespuestaUsuario {
+public class RespuestaUsuario implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private long idRespuesta, idIntento;
     private int idPregunta, idAlternativa, tiempoSegundos;

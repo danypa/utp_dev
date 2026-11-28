@@ -1,7 +1,7 @@
 # MAGISTRA - Java Escritorio (POO + MVC + DAO + JDBC + MySQL)
 
 ## Requisitos
-- JDK 17
+- JDK 17 o posterior (el proyecto compila para Java 17)
 - MySQL Server 8.0 o superior
 - NetBeans (recomendado)
 
@@ -15,15 +15,7 @@ El `pom.xml` declara **MySQL Connector/J 26.10.0**. Maven descarga el driver y l
 4. Los datos demo no representan un banco oficial de preguntas.
 
 ## Configuración de conexión
-La aplicación se conecta a `localhost:3306/magistra` con el usuario `root`. Puedes cambiar la URL y el usuario en `ConexionBD.java`.
-
-Si tu servidor requiere contraseña, crea `conexion.local.properties` junto a `pom.xml` y escribe la clave después del signo `=`.
-
-```properties
-password=
-```
-
-Ejecuta el proyecto desde esta carpeta para que encuentre el archivo local. También puedes definir la variable de entorno `MAGISTRA_DB_PASSWORD`, que tiene prioridad sobre el archivo. Si ambas opciones están sin configurar, la aplicación usa una contraseña vacía.
+La aplicación se conecta a `localhost:3306/magistra`. La versión publicada trae la constante `CLAVE` vacía. Para configurar tu conexión, edita `URL`, `USUARIO` y `CLAVE` en tu copia local de `src/main/java/pe/edu/magistra/util/ConexionBD.java` y vuelve a compilar. La contraseña queda incluida en el código fuente y en el JAR compilado.
 
 ## Ejecutar
 Con Maven:
